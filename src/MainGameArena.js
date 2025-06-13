@@ -1,21 +1,27 @@
 import React, { useState, useEffect, useCallback } from "react";
 // Catatan: Impor CSS sudah dihapus karena semua gaya digabungkan ke App.css
 
-const gameAreaWidth = 870; // Meningkatkan lebar arena untuk lebih banyak ruang
-const gameAreaHeight = 700; // Meningkatkan tinggi arena
+// --- LANGKAH 1: Impor gambar background Anda di sini ---
+// Pastikan PATH INI BENAR sesuai lokasi gambar di proyek Anda.
+// Contoh: Jika gambar ada di 'src/Images/main_arena_background.png'
+import mainArenaBg from "./Images/Main_ArenaBG.png"; // Ganti dengan nama file dan path Anda
+
+const gameAreaWidth = 900; // Lebar arena game
+const gameAreaHeight = 700; // Tinggi arena game
 const playerSize = 50; // Ukuran avatar pemain
 
 function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
   const initialPlayerPosition = playerData?.stats?.position || { x: 0, y: 0 };
-  const [playerCurrentPosition, setPlayerCurrentPosition] = useState(
-    initialPlayerPosition
-  );
+  const [playerCurrentPosition, setPlayerCurrentPosition] = useState(initialPlayerPosition);
 
-  const updatePlayerPosition = useCallback((newX, newY) => {
-    const boundedX = Math.max(0, Math.min(newX, gameAreaWidth - playerSize));
-    const boundedY = Math.max(0, Math.min(newY, gameAreaHeight - playerSize));
-    setPlayerCurrentPosition({ x: boundedX, y: boundedY });
-  }, []);
+  const updatePlayerPosition = useCallback(
+    (newX, newY) => {
+      const boundedX = Math.max(0, Math.min(newX, gameAreaWidth - playerSize));
+      const boundedY = Math.max(0, Math.min(newY, gameAreaHeight - playerSize));
+      setPlayerCurrentPosition({ x: boundedX, y: boundedY });
+    },
+    []
+  );
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -53,6 +59,9 @@ function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
     };
   }, [playerCurrentPosition, updatePlayerPosition]);
 
+  // Catatan: useEffect untuk pengurangan status over time sekarang dipindahkan ke App.js
+  // untuk pengelolaan global yang lebih baik.
+
   const handleOnScreenMove = (direction) => {
     let newX = playerCurrentPosition.x;
     let newY = playerCurrentPosition.y;
@@ -81,7 +90,16 @@ function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
     <div className="game-arena-wrapper">
       <div
         className="game-area"
-        style={{ width: gameAreaWidth, height: gameAreaHeight }}
+        style={{
+          width: gameAreaWidth,
+          height: gameAreaHeight,
+          // --- LANGKAH 2: Gunakan gambar yang diimpor di sini ---
+          backgroundImage: `url(${mainArenaBg})`, // Menyetel gambar background
+          backgroundSize: 'cover', // Sesuaikan ini: 'cover', 'contain', atau ukuran px/persen
+          backgroundPosition: 'center', // Pusatkan gambar
+          backgroundRepeat: 'no-repeat', // Hindari pengulangan gambar
+          // Hapus background-color: #e8f5e9; dari App.css jika ada, atau pastikan di-override
+        }}
       >
         {/* Avatar pemain */}
         <img
@@ -96,8 +114,7 @@ function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
           }}
         />
 
-        {/* --- Area Perjalanan Baru (Sesuai Gambar) --- */}
-        {/* Kelas CSS yang sama dengan yang didefinisikan di App.css */}
+        {/* Contoh area yang bisa diklik */}
         <div className="travel-area home" onClick={() => onGoToArea("Home")}>
           Home
         </div>
@@ -107,19 +124,12 @@ function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
         <div className="travel-area lake" onClick={() => onGoToArea("Lake")}>
           Lake
         </div>
-        <div
-          className="travel-area temple"
-          onClick={() => onGoToArea("Temple")}
-        >
+        <div className="travel-area temple" onClick={() => onGoToArea("Temple")}>
           Temple
         </div>
-        <div
-          className="travel-area mountain"
-          onClick={() => onGoToArea("Mountain")}
-        >
+        <div className="travel-area mountain" onClick={() => onGoToArea("Mountain")}>
           Mountain
         </div>
-        {/* --- Akhir Area Perjalanan Baru --- */}
       </div>
 
       {/* Tombol di layar untuk pergerakan */}
