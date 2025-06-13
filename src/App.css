@@ -1,99 +1,151 @@
 /* src/App.css */
 
-/* --- Umum / App.js Styling --- */
-.App {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #f4f4f4;
-  min-height: 100vh;
-  display: flex; /* Gunakan flexbox untuk App */
-  flex-direction: column; /* Tata App dalam kolom (header di atas, layout game di bawah) */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@300;400;500;600;700&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #d6f6ff;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  min-height: 100vh;
   padding: 20px;
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+  background: linear-gradient(180deg, #fdfdfd, #e0f2f7);
+  border-radius: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1350px;
+  min-height: 90vh;
+  border: 2px solid #a8dadc;
 }
 
 h1 {
-  color: #333;
-  margin-bottom: 20px; /* Kurangi margin karena ada layout baru di bawahnya */
+  font-family: "Fredoka One", cursive;
+  color: #3f68a8;
+  font-size: 3.5em;
+  margin-bottom: 35px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+  letter-spacing: 1.5px;
 }
 
-/* --- Layout Game Utama (Sidebar + Arena) --- */
 .game-layout {
-  display: flex; /* Ini yang membuat sidebar dan main-content-area menyamping */
-  width: 100%; /* Pastikan mengisi lebar penuh */
-  max-width: 1200px; /* Batasi lebar total jika perlu */
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Penting untuk border-radius */
-  flex-grow: 1; /* Biarkan game-layout mengambil sisa ruang vertikal */
-  min-height: 70vh; /* Pastikan ada tinggi minimum untuk layout game */
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  background-color: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.08);
 }
 
 .sidebar-stats {
-  width: 250px; /* Lebar sidebar */
-  background-color: #e0f7fa;
-  padding: 20px;
-  border-right: 1px solid #b2ebf2; /* Garis pemisah */
+  width: 300px;
+  background: linear-gradient(180deg, #e0f8ff, #c3eefb);
+  padding: 30px;
+  border-right: 3px solid #8ecae6;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Sejajarkan konten ke kiri */
-  gap: 10px; /* Jarak antar elemen di sidebar */
-  flex-shrink: 0; /* Pastikan sidebar tidak mengecil */
+  align-items: flex-start;
+  gap: 15px;
+  flex-shrink: 0;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-stats h3 {
+  font-family: "Fredoka One", cursive;
   margin-top: 0;
-  margin-bottom: 20px;
-  color: #00796b;
-  text-align: center; /* Nama pemain di tengah */
-  width: 100%; /* Agar bisa rata tengah */
+  margin-bottom: 30px;
+  color: #219ebc;
+  font-size: 1.8em;
+  text-align: center;
+  width: 100%;
+  border-bottom: 2px solid #a2daed;
+  padding-bottom: 15px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-stats p {
-  margin: 5px 0;
-  color: #333;
+  margin: 8px 0;
+  color: #4a6c89;
+  font-size: 1.1em;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .main-content-area {
-  flex-grow: 1; /* Ini akan mengambil sisa ruang yang tersedia */
+  flex-grow: 1;
   display: flex;
-  justify-content: center; /* Pusatkan game arena */
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 20px;
-  background-color: #f8f8f8; /* Warna background untuk area game */
+  padding: 30px;
+  background-color: #f0faff;
+  min-width: 1000px;
 }
 
-/* --- Player Stats Bar Styling (dipindahkan ke App.css) --- */
 .stat-bar-container {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  gap: 10px;
-  width: 100%; /* Pastikan bar mengisi lebar sidebar */
+  margin-bottom: 15px;
+  gap: 12px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 10px 15px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #cceeff;
 }
 
 .stat-label {
-  font-weight: bold;
-  min-width: 70px;
+  font-weight: 700;
+  min-width: 85px;
   text-align: right;
-  color: #555;
+  color: #34495e;
+  font-size: 1.15em;
 }
 
 .stat-bar {
-  flex-grow: 1; /* Biarkan bar mengisi sisa ruang */
-  height: 20px;
-  background-color: #ddd;
-  border: 1px solid #aaa;
-  border-radius: 10px;
+  flex-grow: 1;
+  height: 25px;
+  background-color: #e9f5f9;
+  border: 1px solid #b3e0f2;
+  border-radius: 12.5px;
   overflow: hidden;
   position: relative;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .stat-fill {
   height: 100%;
-  transition: width 0.3s ease-in-out;
-  border-radius: 10px;
+  border-radius: 12.5px;
+  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: linear-gradient(to right, #48c78e, #6bd4a4);
+}
+.stat-bar-container:nth-child(2) .stat-fill {
+  background: linear-gradient(to right, #ff8c00, #ffb84d);
+}
+.stat-bar-container:nth-child(3) .stat-fill {
+  background: linear-gradient(to right, #9c27b0, #d15ce7);
+}
+.stat-bar-container:nth-child(4) .stat-fill {
+  background: linear-gradient(to right, #ffeb3b, #ffec8b);
+}
+.stat-bar-container:nth-child(5) .stat-fill {
+  background: linear-gradient(to right, #03a9f4, #67daff);
 }
 
 .stat-value {
@@ -101,288 +153,508 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: black;
-  font-weight: bold;
-  font-size: 14px;
-  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
-  z-index: 1;
+  color: #2c3e50;
+  font-weight: 800;
+  font-size: 1em;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.9);
+  z-index: 2;
 }
 
-/* --- Character Selection Styling (dipindahkan ke App.css) --- */
+.inventory {
+  background-color: #f0fcff;
+  border: 2px solid #bceceb;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.inventory p {
+  font-weight: 700;
+  color: #1a5276;
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 2px dashed #c2e2f3;
+  padding-bottom: 8px;
+  font-size: 1.1em;
+}
+
+.inventory ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.inventory li {
+  background-color: #eafaff;
+  border: 1px solid #d4edda;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  font-size: 1em;
+  color: #216a5c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-out;
+}
+.inventory li:hover {
+  background-color: #e0fcfc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.use-item-button {
+  background: linear-gradient(145deg, #2ecc71, #27ae60);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: all 0.2s ease, transform 0.1s ease;
+  margin-left: 15px;
+  flex-shrink: 0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.use-item-button:hover {
+  background: linear-gradient(145deg, #27ae60, #219d52);
+  transform: translateY(-1px);
+}
+.use-item-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 .character-selection-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
+  padding: 40px;
+  background: linear-gradient(145deg, #ffffff, #f0f8ff);
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #d0e8f2;
 }
 
 .carousel-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
+  gap: 30px;
 }
 
 .character-display {
-  width: 200px; /* Lebar area tampilan karakter */
-  height: 250px; /* Tinggi area tampilan karakter */
+  width: 250px;
+  height: 320px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 0 20px;
+  border: 4px solid #8e44ad;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+.character-display::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 20px;
+  border: 5px solid transparent;
+  background: linear-gradient(45deg, #8e44ad, #f39c12) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+.character-display:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+.character-display:hover::before {
+  opacity: 1;
 }
 
 .nav-button {
-  background-color: #007bff;
+  background: linear-gradient(145deg, #8e44ad, #6c5ce7);
   color: white;
   border: none;
-  padding: 10px 15px;
-  font-size: 24px;
+  padding: 15px 22px;
+  font-size: 32px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  border-radius: 50%;
+  transition: all 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(145deg, #6c5ce7, #5c4cb8);
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.nav-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .player-input-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  gap: 25px;
+  width: 400px;
+  padding: 30px;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: #fdfdfd;
 }
 
 .player-input-form label {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #34495e;
 }
 
 .player-input-form input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  width: calc(100% - 30px);
+  padding: 15px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 1.2em;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.player-input-form input[type="text"]:focus {
+  border-color: #8e44ad;
+  box-shadow: 0 0 0 4px rgba(142, 68, 173, 0.3);
 }
 
 .player-input-form button[type="submit"] {
-  background-color: #28a745;
+  background: linear-gradient(145deg, #2ecc71, #27ae60);
   color: white;
   border: none;
-  padding: 12px 25px;
-  font-size: 18px;
+  padding: 18px 40px;
+  font-size: 1.3em;
+  font-weight: 700;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  border-radius: 15px;
+  transition: all 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
-
 .player-input-form button[type="submit"]:hover {
-  background-color: #218838;
+  background: linear-gradient(145deg, #27ae60, #219d52);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+.player-input-form button[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* --- Character Card Styling (dipindahkan ke App.css) --- */
+/* --- Character Card Styling --- */
 .character-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding: 20px;
 }
 
 .character-card img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
 }
 
 .character-card h2 {
+  font-family: "Fredoka One", cursive;
   margin: 0;
-  font-size: 24px;
-  color: #333;
+  font-size: 2em;
+  color: #3f68a8;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* --- MainGameArena / SpecificAreaStage Styling (dipindahkan ke App.css) --- */
+/* --- MainGameArena / SpecificAreaStage Styling --- */
+.main-content-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f8f8;
+  min-width: 900px;
+}
+
 .game-arena-wrapper {
   display: flex;
-  flex-direction: column; /* Konten di dalam wrapper ini ditata vertikal */
+  flex-direction: column;
   align-items: center;
-  /* margin-top: 30px; Ini mungkin tidak lagi diperlukan dengan layout App.js yang baru */
+  gap: 30px;
 }
 
 .game-area {
   position: relative;
-  border: 2px solid #66bb6a;
+  border: 5px solid #48c78e;
   background-color: #e8f5e9;
   overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  /* Ukuran diatur di komponen JS, tapi bisa juga override di sini jika perlu */
-  width: 800px; /* Contoh: Ukuran default */
-  height: 600px; /* Contoh: Ukuran default */
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  width: 900px;
+  height: 700px;
+  transition: all 0.4s ease-out;
+  z-index: 1;
+}
+.game-area.activity-active {
+  position: relative;
+}
+
+.game-area.activity-active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  z-index: 5;
+  animation: fade-in-overlay 0.4s forwards;
+  pointer-events: all;
+}
+
+@keyframes fade-in-overlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .player-avatar {
   position: absolute;
-  background-color: rgba(255, 255, 0, 0.6); /* Highlight avatar */
-  border-radius: 50%; /* Membuat avatar bulat jika gambar mendukung */
-  transition: left 0.1s linear, top 0.1s linear; /* Animasi pergerakan */
-  z-index: 10; /* Pastikan avatar di atas elemen lain */
+  border-radius: 50%;
+  transition: left 0.1s linear, top 0.1s linear;
+  z-index: 10;
+  width: 80px;
+  height: 80px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
-/* src/App.css */
+.player-avatar.activity-animating {
+  animation: working-animation 0.5s infinite alternate ease-in-out;
+  box-shadow: 0 0 30px 12px rgba(76, 175, 80, 1);
+  z-index: 15;
+  border: 4px solid #4caf50;
+}
 
-/* ... (CSS yang sudah ada sebelumnya) ... */
-
-/* --- MainGameArena / SpecificAreaStage Styling --- */
-/* ... (Gaya .game-arena-wrapper, .game-area, .player-avatar yang sudah ada) ... */
+@keyframes working-animation {
+  0% {
+    transform: scale(1) translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.08) translateY(-8px) rotate(5deg);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1) translateY(-10px) rotate(-5deg);
+    opacity: 0.9;
+  }
+  75% {
+    transform: scale(1.08) translateY(-5px) rotate(3deg);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1) translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+}
 
 .travel-area {
   position: absolute;
-  /* Hapus padding, kita akan menggunakan width/height tetap */
-  /* padding: 10px 20px; */
-  background-color: #64b5f6;
+  background: linear-gradient(145deg, #7b9fe3, #5a85d3);
   color: white;
-  /* Gunakan width dan height yang sama untuk lingkaran */
-  width: 120px; /* Ukuran lingkaran */
-  height: 120px; /* Ukuran lingkaran */
-  display: flex; /* Untuk memusatkan teks di dalam lingkaran */
+  width: 120px;
+  height: 120px;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%; /* Membuat bentuk lingkaran */
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 5;
+  font-weight: 600;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  z-index: 8;
   text-align: center;
-  font-size: 16px;
+  font-size: 1.1em;
+  transition: all 0.3s ease-out;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .travel-area:hover {
-  background-color: #2196f3;
-  transform: scale(1.05); /* Efek sedikit membesar saat hover */
+  background: linear-gradient(145deg, #6a8cd4, #4a70c3);
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+.travel-area:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Posisi spesifik untuk setiap area travel */
-/* Sesuaikan nilai 'top' dan 'left'/'right' sesuai dengan keinginan Anda */
 .travel-area.home {
-  top: 100px;
-  left: 150px; /* Sesuaikan posisi agar tidak terlalu ke pojok */
+  top: 90px;
+  left: 200px;
 }
 .travel-area.beach {
-  top: 100px;
-  right: 150px; /* Sesuaikan posisi agar tidak terlalu ke pojok */
+  top: 50px;
+  left: 60px;
 }
 .travel-area.lake {
-  bottom: 100px;
-  left: 150px;
+  bottom: 50px;
+  left: 100px;
 }
 .travel-area.temple {
-  top: 50%; /* Memusatkan secara vertikal */
-  left: 50%; /* Memusatkan secara horizontal */
-  transform: translate(
-    -50%,
-    -50%
-  ); /* Menyesuaikan posisi tengah elemen itu sendiri */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .travel-area.mountain {
-  bottom: 100px;
-  right: 150px;
-}
-
-/* Hapus aturan posisi lama yang mungkin tumpang tindih, atau pastikan yang baru ini override */
-/* .beach { top: 50px; left: 50px; } */
-/* .home { top: 50px; right: 50px; } */
-/* .city { bottom: 50px; left: 50px; } */
-/* .forest { bottom: 50px; right: 50px; } */
-/* Pastikan ini dihapus atau tidak menyebabkan konflik jika Anda tidak lagi menggunakannya */
-
-/* ... (on-screen-controls dan SpecificAreaStage styling yang sudah ada) ... */
-/* Posisi contoh area travel */
-.beach {
-  top: 50px;
-  left: 50px;
-}
-.home {
-  top: 50px;
-  right: 50px;
-}
-.city {
-  bottom: 50px;
-  left: 50px;
-}
-.forest {
-  bottom: 50px;
-  right: 50px;
+  bottom: 300px;
+  right: 100px;
 }
 
 .on-screen-controls {
-  margin-top: 20px;
+  margin-top: 40px;
   display: grid;
-  grid-template-columns: repeat(3, 50px);
-  grid-template-rows: repeat(3, 50px);
-  gap: 5px;
+  grid-template-columns: repeat(3, 70px);
+  grid-template-rows: repeat(3, 70px);
+  gap: 10px;
   justify-items: center;
   align-items: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e0e0e0;
 }
 
 .on-screen-controls button {
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  background-color: #90a4ae;
+  width: 70px;
+  height: 70px;
+  font-size: 32px;
+  background: linear-gradient(145deg, #61b369, #4a9e52);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.25s ease, transform 0.1s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.on-screen-controls button:hover {
-  background-color: #607d8b;
+.on-screen-controls button:hover:not(:disabled) {
+  background: linear-gradient(145deg, #4a9e52, #3b7f42);
+  transform: translateY(-3px) scale(1.05);
+}
+.on-screen-controls button:active:not(:disabled) {
+  transform: translateY(0) scale(1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.on-screen-controls button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .on-screen-controls button:nth-child(1) {
   grid-column: 2;
   grid-row: 1;
-} /* Up */
+}
 .on-screen-controls div:nth-child(2) {
   grid-column: 1 / span 3;
   grid-row: 2;
   display: flex;
   justify-content: center;
-  gap: 5px;
-} /* Left/Right */
+  gap: 10px;
+  width: 100%;
+}
 .on-screen-controls button:nth-child(3) {
   grid-column: 2;
   grid-row: 3;
-} /* Down */
+}
 
-/* --- SpecificAreaStage Styling (dipindahkan ke App.css) --- */
+.specific-area-stage-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .specific-area-stage-wrapper .game-area {
   position: relative;
-  border: 2px solid #aed581;
+  border: 5px solid #48c78e;
   background-color: #f1f8e9;
   overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  /* Background image akan diatur inline di komponen JS */
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  width: 800px;
+  height: 600px;
+  transition: all 0.4s ease-out;
+  z-index: 1;
+}
+
+.specific-area-stage-wrapper .game-area.activity-active {
+  position: relative;
+}
+
+.specific-area-stage-wrapper .game-area.activity-active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  z-index: 5;
+  animation: fade-in-overlay 0.4s forwards;
+  pointer-events: all;
 }
 
 .specific-area-stage-wrapper .player-avatar {
   position: absolute;
-  background-color: rgba(255, 255, 0, 0.6);
   border-radius: 50%;
   transition: left 0.1s linear, top 0.1s linear;
   z-index: 10;
@@ -390,101 +662,342 @@ h1 {
 
 .activity-zone {
   position: absolute;
-  background-color: rgba(255, 152, 0, 0.3); /* Zona tidak aktif */
-  border: 1px dashed orange;
+  background-color: rgba(255, 152, 0, 0.5);
+  border: 3px dashed #e67e22;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 1.1em;
+  font-weight: 700;
   color: #333;
-  z-index: 5;
-  transition: background-color 0.2s ease;
+  z-index: 8;
+  transition: all 0.25s ease;
+  border-radius: 12px;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .activity-zone.active {
-  background-color: rgba(76, 175, 80, 0.5); /* Zona aktif */
-  border: 2px solid limegreen;
+  background-color: rgba(76, 175, 80, 0.7);
+  border: 4px solid #27ae60;
+  box-shadow: 0 0 15px 5px rgba(76, 175, 80, 0.9);
+  transform: scale(1.03);
 }
 
 .activity-button-container {
-  margin-top: 20px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .activity-button-container button {
-  background-color: #4caf50;
+  background: linear-gradient(145deg, #2ecc71, #27ae60);
   color: white;
   border: none;
-  padding: 15px 30px;
-  font-size: 20px;
+  padding: 18px 35px;
+  font-size: 1.5em;
+  font-weight: 700;
   cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .activity-button-container button:hover {
-  background-color: #45a049;
+  background: linear-gradient(145deg, #27ae60, #219d52);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+.activity-button-container button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .back-to-main-button {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: #f44336;
+  top: 20px;
+  left: 20px;
+  background-color: #e74c3c;
   color: white;
   border: none;
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 5px;
+  padding: 12px 20px;
+  font-size: 1.1em;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.1s ease;
   z-index: 20;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
-.back-to-main-button:hover {
-  background-color: #d32f2f;
+.back-to-main-button:hover:not(:disabled) {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+.back-to-main-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.back-to-main-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
-/* Kontrol di layar (sama seperti MainGameArena.css) */
-.specific-area-stage-wrapper .on-screen-controls {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 50px);
-  grid-template-rows: repeat(3, 50px);
-  gap: 5px;
-  justify-items: center;
+/* --- Game Over Screen Styling --- */
+.game-over-screen {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 50px;
+  background: linear-gradient(145deg, #ff6b6b, #e74c3c);
+  border: 3px solid #c0392b;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  max-width: 700px;
+  margin-top: 50px;
+  text-align: center;
+  color: white;
+  animation: scale-in 0.5s ease-out;
 }
 
-.specific-area-stage-wrapper .on-screen-controls button {
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  background-color: #90a4ae;
+@keyframes scale-in {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.game-over-screen h2 {
+  font-family: "Fredoka One", cursive;
+  color: #fff;
+  font-size: 4em;
+  margin-bottom: 25px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.game-over-message {
+  color: #ffefff;
+  font-size: 1.8em;
+  margin-bottom: 40px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.final-stats {
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 15px;
+  padding: 25px 35px;
+  margin-bottom: 40px;
+  text-align: left;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 400px;
+}
+
+.final-stats h3 {
+  font-family: "Inter", sans-serif;
+  margin-top: 0;
+  color: #ffffff;
+  font-size: 1.4em;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.6);
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+
+.final-stats p {
+  margin: 8px 0;
+  color: #fff;
+  font-weight: 400;
+  font-size: 1.1em;
+}
+.final-stats .inventory {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 12px;
+  padding: 8px 12px;
+}
+.final-stats .inventory p {
+  color: #fff;
+  font-weight: 500;
+}
+.final-stats .inventory ul {
+  padding-left: 20px;
+}
+.final-stats .inventory li {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 6px 10px;
+}
+
+.restart-button {
+  background: linear-gradient(145deg, #4caf50, #27ae60);
   color: white;
   border: none;
-  border-radius: 5px;
+  padding: 20px 45px;
+  font-size: 1.4em;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
-.specific-area-stage-wrapper .on-screen-controls button:hover {
-  background-color: #607d8b;
+.restart-button:hover {
+  background: linear-gradient(145deg, #27ae60, #219d52);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+.restart-button:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
-.specific-area-stage-wrapper .on-screen-controls button:nth-child(1) {
-  grid-column: 2;
-  grid-row: 1;
-} /* Up */
-.specific-area-stage-wrapper .on-screen-controls div:nth-child(2) {
-  grid-column: 1 / span 3;
-  grid-row: 2;
+/* --- Debug Button Styling --- */
+.debug-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1.05em;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin-top: 30px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.debug-button:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+.debug-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Fast Forward Button Global Styling --- */
+.fast-forward-button-global {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1.05em;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin-top: 15px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.fast-forward-button-global:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+.fast-forward-button-global:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Aktivitas Progress Bar */
+.activity-feedback-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  width: 100%;
+  max-width: 450px;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border: 2px solid #a8dadc;
+  z-index: 20;
+  animation: slide-in-top 0.4s ease-out;
+}
+
+@keyframes slide-in-top {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.activity-progress-bar {
+  width: 100%;
+  height: 35px;
+  background-color: #e9ecef;
+  border-radius: 17.5px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #4caf50, #8bc34a);
+  border-radius: 17.5px;
+  transition: width 0.1s linear;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 5px;
-} /* Left/Right */
-.specific-area-stage-wrapper .on-screen-controls button:nth-child(3) {
-  grid-column: 2;
-  grid-row: 3;
-} /* Down */
+  color: white;
+  font-weight: 700;
+  font-size: 1.05em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.progress-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  line-height: 35px;
+  color: #333;
+  font-weight: 700;
+  font-size: 1em;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.fast-forward-button {
+  background: linear-gradient(145deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.fast-forward-button:hover {
+  background: linear-gradient(145deg, #2980b9, #2173a7);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.fast-forward-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}

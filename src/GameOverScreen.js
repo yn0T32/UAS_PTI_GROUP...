@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function GameOverScreen({ message, playerData, onRestartGame }) {
   const finalStats = playerData?.stats || {}; // Ambil stats terakhir pemain
@@ -16,12 +16,22 @@ function GameOverScreen({ message, playerData, onRestartGame }) {
           <p>Happiness: {Math.round(finalStats.happiness)}</p>
           <p>Cleanliness: {Math.round(finalStats.cleanliness)}</p>
           <p>Money: ${finalStats.money}</p>
-          <p>
-            Items:{" "}
-            {finalStats.items?.length > 0
-              ? finalStats.items.join(", ")
-              : "None"}
-          </p>
+          {/* Menampilkan item dari objek */}
+          <div className="inventory">
+            <p>Items:</p>
+            {/* Memastikan Object.keys menerima objek yang valid untuk menghindari error */}
+            {Object.keys(finalStats.items || {}).length > 0 ? (
+              <ul>
+                {Object.entries(finalStats.items).map(([itemName, quantity]) => (
+                  <li key={itemName}>{itemName}: {quantity}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>None</p>
+            )}
+          </div>
+          <p>Score: {finalStats.score || 0}</p> {/* BARIS INI UNTUK MENAMPILKAN SKOR */}
+          <p>Waktu Hidup: {finalStats.lifetime || 0} detik</p> {/* BARIS INI UNTUK MENAMPILKAN WAKTU HIDUP */}
         </div>
       )}
 

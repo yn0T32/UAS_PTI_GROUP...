@@ -1,14 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-// Catatan: Impor CSS sudah dihapus karena semua gaya digabungkan ke App.css
+import mainArenaBg from "./Images/Main_ArenaBG.png";
 
-// --- LANGKAH 1: Impor gambar background Anda di sini ---
-// Pastikan PATH INI BENAR sesuai lokasi gambar di proyek Anda.
-// Contoh: Jika gambar ada di 'src/Images/main_arena_background.png'
-import mainArenaBg from "./Images/Main_ArenaBG.png"; // Ganti dengan nama file dan path Anda
-
-const gameAreaWidth = 900; // Lebar arena game
-const gameAreaHeight = 700; // Tinggi arena game
-const playerSize = 50; // Ukuran avatar pemain
+const gameAreaWidth = 900;
+const gameAreaHeight = 700;
+const playerSize = 50;
 
 function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
   const initialPlayerPosition = playerData?.stats?.position || { x: 0, y: 0 };
@@ -59,9 +54,6 @@ function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
     };
   }, [playerCurrentPosition, updatePlayerPosition]);
 
-  // Catatan: useEffect untuk pengurangan status over time sekarang dipindahkan ke App.js
-  // untuk pengelolaan global yang lebih baik.
-
   const handleOnScreenMove = (direction) => {
     let newX = playerCurrentPosition.x;
     let newY = playerCurrentPosition.y;
@@ -93,15 +85,12 @@ function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
         style={{
           width: gameAreaWidth,
           height: gameAreaHeight,
-          // --- LANGKAH 2: Gunakan gambar yang diimpor di sini ---
-          backgroundImage: `url(${mainArenaBg})`, // Menyetel gambar background
-          backgroundSize: 'cover', // Sesuaikan ini: 'cover', 'contain', atau ukuran px/persen
-          backgroundPosition: 'center', // Pusatkan gambar
-          backgroundRepeat: 'no-repeat', // Hindari pengulangan gambar
-          // Hapus background-color: #e8f5e9; dari App.css jika ada, atau pastikan di-override
+          backgroundImage: `url(${mainArenaBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
       >
-        {/* Avatar pemain */}
         <img
           src={playerData.character.image}
           alt={playerData.character.name}
@@ -114,7 +103,6 @@ function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
           }}
         />
 
-        {/* Contoh area yang bisa diklik */}
         <div className="travel-area home" onClick={() => onGoToArea("Home")}>
           Home
         </div>
@@ -131,8 +119,7 @@ function MainGameArena({ playerData, onGoToArea, onUpdatePlayerStats }) {
           Mountain
         </div>
       </div>
-
-      {/* Tombol di layar untuk pergerakan */}
+      
       <div className="on-screen-controls">
         <button onClick={() => handleOnScreenMove("up")}>⬆️</button>
         <div>

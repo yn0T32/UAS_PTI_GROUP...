@@ -5,19 +5,157 @@ import SpecificAreaStage from "./SpecificAreaStage";
 import GameOverScreen from "./GameOverScreen";
 import "./App.css";
 
-// Impor gambar lokal untuk karakter
-// PASTIKAN PATH INI BENAR SESUAI DENGAN STRUKTUR PROYEK ANDA
 import Male1 from "./Images/Male1.png";
 import Male2 from "./Images/Male2.png";
 import Female1 from "./Images/Female1.png";
 import Female2 from "./Images/Female2.png";
 
 const characters = [
-  { id: 1, name: "Male Warrior", image: Male1 },
-  { id: 2, name: "Male Mage", image: Male2 },
-  { id: 3, name: "Female Archer", image: Female1 },
-  { id: 4, name: "Female Rogue", image: Female2 },
+  { id: 1, image: Male1 },
+  { id: 2, image: Male2 },
+  { id: 3, image: Female1 },
+  { id: 4, image: Female2 },
 ];
+
+const itemData = {
+  Potion: {
+    score: 10,
+    cost: 10,
+    description: "Menyembuhkan sedikit HP (contoh).",
+    useEffect: { restoreMeal: 20, restoreHappiness: 5 },
+  },
+  "Fishing Rod": {
+    score: 50,
+    cost: 20,
+    description: "Digunakan untuk memancing ikan.",
+    consumable: false,
+  },
+  "Rare Gem": {
+    score: 100,
+    cost: 0,
+    description: "Batu mulia yang sangat langka.",
+    consumable: false,
+  },
+  "Ancient Scroll": {
+    score: 75,
+    cost: 0,
+    description: "Gulungan kuno berisi pengetahuan.",
+    consumable: false,
+  },
+  "Wooden Shield": {
+    score: 20,
+    cost: 15,
+    description: "Perisai dasar dari kayu.",
+    consumable: false,
+  },
+  "Gold Coin": {
+    score: 5,
+    cost: 0,
+    description: "Koin emas standar.",
+    consumable: false,
+  },
+  "Wild Berries": {
+    score: 5,
+    cost: 0,
+    description: "Berry liar yang bisa dimakan.",
+    useEffect: { restoreMeal: 10 },
+  },
+  "Clean Cloth": {
+    score: 8,
+    cost: 2,
+    description: "Kain bersih untuk mandi.",
+    useEffect: { restoreCleanliness: 25 },
+  },
+  "Energy Bar": {
+    score: 12,
+    cost: 8,
+    description: "Bar energi cepat.",
+    useEffect: { restoreSleep: 15, restoreMeal: 5 },
+  },
+  "Lucky Charm": {
+    score: 30,
+    cost: 0,
+    description: "Jimat keberuntungan.",
+    consumable: false,
+  },
+  "Mystery Box": {
+    score: 200,
+    cost: 100,
+    description: "Kotak misteri, berikan skor besar!",
+    useEffect: { addScore: 200 },
+  },
+  "Money Pouch": {
+    score: 25,
+    cost: 0,
+    description: "Kantong berisi uang.",
+    useEffect: { addMoney: 50 },
+  },
+  Fish: {
+    score: 15,
+    cost: 0,
+    description: "Ikan biasa.",
+    useEffect: { restoreMeal: 15 },
+  },
+  "Rare Fish": {
+    score: 40,
+    cost: 0,
+    description: "Ikan langka.",
+    useEffect: { restoreMeal: 30, restoreHappiness: 5 },
+  },
+  "Epic Fish": {
+    score: 70,
+    cost: 0,
+    description: "Ikan epik.",
+    useEffect: { restoreMeal: 50, restoreHappiness: 10, restoreSleep: 5 },
+  },
+  "Legendary Fish": {
+    score: 150,
+    cost: 0,
+    description: "Ikan legendaris!",
+    useEffect: {
+      restoreMeal: 80,
+      restoreHappiness: 20,
+      restoreSleep: 10,
+      restoreCleanliness: 5,
+    },
+  },
+  Seashell: {
+    score: 3,
+    cost: 0,
+    description: "Kerang cantik dari pantai.",
+    consumable: false,
+  },
+  "Forest Mushroom": {
+    score: 7,
+    cost: 0,
+    description: "Jamur dari hutan.",
+    useEffect: { restoreMeal: 12 },
+  },
+  "City Map": {
+    score: 10,
+    cost: 5,
+    description: "Peta kota.",
+    consumable: false,
+  },
+  "Lake Crystal": {
+    score: 20,
+    cost: 0,
+    description: "Kristal bening dari danau.",
+    consumable: false,
+  },
+  "Ancient Relic": {
+    score: 90,
+    cost: 0,
+    description: "Relik kuno dari kuil.",
+    consumable: false,
+  },
+  "Mountain Herb": {
+    score: 10,
+    cost: 0,
+    description: "Herbal pegunungan.",
+    useEffect: { restoreCleanliness: 10 },
+  },
+};
 
 function App() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -25,6 +163,7 @@ function App() {
   const [currentScreen, setCurrentScreen] = useState("characterSelection");
   const [activeArea, setActiveArea] = useState(null);
   const [gameOverMessage, setGameOverMessage] = useState("");
+  const [timeMultiplier, setTimeMultiplier] = useState(1);
 
   const handleSelectionComplete = (selectedCharacter, playerName) => {
     const initialPlayerStats = {
@@ -33,10 +172,10 @@ function App() {
       happiness: 100,
       cleanliness: 100,
       money: 100,
-      items: {}, // Mengubah inisialisasi items menjadi objek kosong
+      items: {},
       position: { x: 0, y: 0 },
-      score: 0, // Inisialisasi score
-      lifetime: 0, // Inisialisasi lifetime (detik)
+      score: 0,
+      lifetime: 0,
     };
     setPlayerData({
       character: selectedCharacter,
@@ -54,7 +193,77 @@ function App() {
     }));
   };
 
-  // Logika Game Over dan Pengurangan Status
+  const handleUseItem = (itemName) => {
+    setPlayerData((prevPlayerData) => {
+      if (!prevPlayerData) return prevPlayerData;
+
+      const newStats = { ...prevPlayerData.stats };
+      const currentItems = { ...newStats.items };
+      const itemToUse = itemData[itemName];
+
+      if (currentItems[itemName] > 0 && itemToUse?.useEffect) {
+        if (itemToUse.useEffect.restoreMeal)
+          newStats.meal = Math.min(
+            100,
+            newStats.meal + itemToUse.useEffect.restoreMeal
+          );
+        if (itemToUse.useEffect.restoreSleep)
+          newStats.sleep = Math.min(
+            100,
+            newStats.sleep + itemToUse.useEffect.restoreSleep
+          );
+        if (itemToUse.useEffect.restoreHappiness)
+          newStats.happiness = Math.min(
+            100,
+            newStats.happiness + itemToUse.useEffect.restoreHappiness
+          );
+        if (itemToUse.useEffect.restoreCleanliness)
+          newStats.cleanliness = Math.min(
+            100,
+            newStats.cleanliness + itemToUse.useEffect.restoreCleanliness
+          );
+        if (itemToUse.useEffect.addMoney)
+          newStats.money = (newStats.money || 0) + itemToUse.useEffect.addMoney;
+        if (itemToUse.useEffect.addScore)
+          newStats.score = (newStats.score || 0) + itemToUse.useEffect.addScore;
+
+        if (itemToUse.consumable !== false) {
+          currentItems[itemName] -= 1;
+          if (currentItems[itemName] <= 0) {
+            delete currentItems[itemName];
+          }
+        }
+
+        for (let statKey in newStats) {
+          if (
+            typeof newStats[statKey] === "number" &&
+            statKey !== "money" &&
+            statKey !== "score" &&
+            statKey !== "lifetime"
+          ) {
+            newStats[statKey] = Math.min(100, newStats[statKey]);
+            newStats[statKey] = Math.max(0, newStats[statKey]);
+          }
+        }
+
+        alert(`Menggunakan ${itemName}! ${itemToUse.description || ""}`);
+
+        return {
+          ...prevPlayerData,
+          stats: newStats,
+          items: currentItems,
+        };
+      } else if (currentItems[itemName] === 0) {
+        alert(`Anda tidak memiliki ${itemName} untuk digunakan.`);
+      } else {
+        alert(
+          `${itemName} tidak bisa digunakan (atau tidak memiliki efek konsumsi).`
+        );
+      }
+      return prevPlayerData;
+    });
+  };
+
   useEffect(() => {
     if (!gameStarted || !playerData || currentScreen === "gameOver") return;
 
@@ -64,17 +273,20 @@ function App() {
 
         const newStats = { ...prevPlayerData.stats };
 
-        newStats.meal = Math.max(0, newStats.meal - 0.5);
-        newStats.sleep = Math.max(0, newStats.sleep - 0.3);
-        newStats.happiness = Math.max(0, newStats.happiness - 0.2);
-        newStats.cleanliness = Math.max(0, newStats.cleanliness - 0.1);
+        newStats.meal = Math.max(0, newStats.meal - 0.5 * timeMultiplier);
+        newStats.sleep = Math.max(0, newStats.sleep - 0.3 * timeMultiplier);
+        newStats.happiness = Math.max(
+          0,
+          newStats.happiness - 0.2 * timeMultiplier
+        );
+        newStats.cleanliness = Math.max(
+          0,
+          newStats.cleanliness - 0.1 * timeMultiplier
+        );
 
-        // Tambahkan score seiring waktu
-        newStats.score = (newStats.score || 0) + 10;
-        // Tambahkan waktu hidup
-        newStats.lifetime = (newStats.lifetime || 0) + 1; // Setiap 1 detik interval, tambah 1 detik lifetime
+        newStats.score = (newStats.score || 0) + 10 * timeMultiplier;
+        newStats.lifetime = (newStats.lifetime || 0) + 1 * timeMultiplier;
 
-        // Menentukan pesan Game Over
         let message = "";
         if (
           newStats.meal <= 0 &&
@@ -98,10 +310,10 @@ function App() {
         }
 
         if (message) {
-          // Jika ada pesan, berarti game over
           setGameOverMessage(message);
           setCurrentScreen("gameOver");
-          return prevPlayerData; // Kembalikan data lama untuk memastikan interval berhenti di clean-up
+          setTimeMultiplier(1);
+          return prevPlayerData;
         }
 
         return {
@@ -109,36 +321,37 @@ function App() {
           stats: newStats,
         };
       });
-    }, 1000); // Setiap 1 detik
+    }, 1000);
 
     return () => clearInterval(interval);
-  }, [gameStarted, playerData, currentScreen]);
+  }, [gameStarted, playerData, currentScreen, timeMultiplier]);
 
-  // Fungsi untuk mereset game
   const handleRestartGame = () => {
     setGameStarted(false);
     setPlayerData(null);
     setCurrentScreen("characterSelection");
     setActiveArea(null);
     setGameOverMessage("");
+    setTimeMultiplier(1);
   };
 
-  // Fungsi debug: Habiskan semua status
   const handleDebugDepleteStats = () => {
     if (playerData) {
       setPlayerData((prev) => ({
-        ...prev,
+        ...prev.stats,
         stats: {
           ...prev.stats,
           meal: 0,
           sleep: 0,
           happiness: 0,
           cleanliness: 0,
-          // Uang dan Item tidak dihabiskan oleh tombol debug ini
         },
       }));
-      // Pengurangan stat di atas akan memicu useEffect Game Over
     }
+  };
+
+  const toggleGlobalFastForward = () => {
+    setTimeMultiplier((prev) => (prev === 1 ? 5 : 1));
   };
 
   const handleGoToArea = (areaName) => {
@@ -157,6 +370,7 @@ function App() {
       ...prev,
       stats: { ...prev.stats, position: { x: 0, y: 0 } },
     }));
+    setTimeMultiplier(1);
   };
 
   const renderCurrentScreen = () => {
@@ -183,6 +397,10 @@ function App() {
             areaName={activeArea}
             onGoBack={handleGoBackToMainArena}
             onUpdatePlayerStats={handleUpdatePlayerStats}
+            timeMultiplier={timeMultiplier}
+            setTimeMultiplier={setTimeMultiplier}
+            itemData={itemData}
+            handleUseItem={handleUseItem}
           />
         );
       case "gameOver":
@@ -205,13 +423,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>
-        {currentScreen === "characterSelection"
-          ? "Pilih Karaktermu!"
-          : currentScreen === "gameOver"
-          ? "Game Over!"
-          : `Game Time! - ${activeArea || "Main Arena"}`}
-      </h1>
+      <h1>Ucup Exploring the Archipelago</h1>
 
       {gameStarted && playerData && currentScreen !== "gameOver" ? (
         <div className="game-layout">
@@ -219,7 +431,6 @@ function App() {
             <h3>
               {playerData.name} - {playerData.character.name}
             </h3>
-            {/* Status Bar untuk Meal */}
             <div className="stat-bar-container">
               <span className="stat-label">Meal:</span>
               <div className="stat-bar">
@@ -235,7 +446,7 @@ function App() {
                 </span>
               </div>
             </div>
-            {/* Status Bar untuk Sleep */}
+
             <div className="stat-bar-container">
               <span className="stat-label">Sleep:</span>
               <div className="stat-bar">
@@ -251,7 +462,7 @@ function App() {
                 </span>
               </div>
             </div>
-            {/* Status Bar untuk Happiness */}
+
             <div className="stat-bar-container">
               <span className="stat-label">Happiness:</span>
               <div className="stat-bar">
@@ -267,7 +478,7 @@ function App() {
                 </span>
               </div>
             </div>
-            {/* Status Bar untuk Cleanliness */}
+
             <div className="stat-bar-container">
               <span className="stat-label">Cleanliness:</span>
               <div className="stat-bar">
@@ -283,9 +494,8 @@ function App() {
                 </span>
               </div>
             </div>
-            {/* Statistik Lainnya (Money, Items) */}
+
             <p>Money: ${playerData.stats.money}</p>
-            {/* Menampilkan item dari objek */}
             <div className="inventory">
               <p>Items:</p>
               {Object.keys(playerData.stats.items || {}).length > 0 ? (
@@ -293,7 +503,15 @@ function App() {
                   {Object.entries(playerData.stats.items).map(
                     ([itemName, quantity]) => (
                       <li key={itemName}>
-                        {itemName}: {quantity}
+                        {itemName} ({quantity})
+                        {itemData[itemName]?.useEffect && quantity > 0 && (
+                          <button
+                            onClick={() => handleUseItem(itemName)}
+                            className="use-item-button"
+                          >
+                            Gunakan
+                          </button>
+                        )}
                       </li>
                     )
                   )}
@@ -302,12 +520,13 @@ function App() {
                 <p>None</p>
               )}
             </div>
-            <p>Score: {playerData.stats.score}</p> {/* Menampilkan score */}
-            <p>Waktu Hidup: {playerData.stats.lifetime} detik</p>{" "}
-            {/* Menampilkan waktu hidup */}
-            {/* Tombol Debug */}
-            <button onClick={handleDebugDepleteStats} className="debug-button">
-              Debug: Habiskan Status
+            <p>Score: {playerData.stats.score}</p>
+            <p>Waktu Hidup: {playerData.stats.lifetime} detik</p>
+            <button
+              onClick={toggleGlobalFastForward}
+              className="fast-forward-button-global"
+            >
+              Fast Forward ({timeMultiplier}x)
             </button>
           </div>
 

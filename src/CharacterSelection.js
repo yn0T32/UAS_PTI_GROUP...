@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import CharacterCard from "./CharacterCard";
-// Tidak lagi mengimpor CSS terpisah, semua CSS sekarang di App.css
 
-// Catatan: Array karakter sekarang diteruskan dari App.js sebagai prop.
-// Jika tidak ada prop `characters` yang diteruskan, ini akan menggunakan array kosong.
 function CharacterSelection({ onSelectionComplete, characters = [] }) {
   const [currentCharacterIndex, setCurrentCharacterIndex] = useState(0);
   const [playerName, setPlayerName] = useState("");
 
-  // Pastikan ada karakter sebelum mencoba mengaksesnya
+
   const currentCharacter =
     characters.length > 0 ? characters[currentCharacterIndex] : null;
 
@@ -29,14 +26,14 @@ function CharacterSelection({ onSelectionComplete, characters = [] }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (playerName.trim() === "") {
-      alert("Nama pemain tidak boleh kosong!"); // Gunakan modal kustom di aplikasi nyata
+      alert("Nama pemain tidak boleh kosong!"); 
       return;
     }
     if (!currentCharacter) {
-      alert("Silakan pilih karakter!"); // Gunakan modal kustom di aplikasi nyata
+      alert("Silakan pilih karakter!"); 
       return;
     }
-    // Menggunakan karakter dari prop
+
     onSelectionComplete(currentCharacter, playerName);
   };
 
@@ -47,7 +44,6 @@ function CharacterSelection({ onSelectionComplete, characters = [] }) {
           &lt;
         </button>
         <div className="character-display">
-          {/* Tampilkan CharacterCard hanya jika ada karakter yang tersedia */}
           {currentCharacter ? (
             <CharacterCard character={currentCharacter} />
           ) : (
