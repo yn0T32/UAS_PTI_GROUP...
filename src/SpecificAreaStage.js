@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 // Catatan: Impor CSS sudah dihapus karena semua gaya digabungkan ke App.css
-
+import beachImage from "./Images/beachimg.png";
+import homeImage from "./Images/homeimg.png";
+import mountainImage from "./Images/mountainimg.png";
+import templeImage from "./Images/templeimg.png";
+import lakeImage from "./Images/lakeimg.png";
 // Definisikan data item beserta skor yang mereka berikan
 const itemData = {
   Potion: {
@@ -39,14 +43,13 @@ const itemData = {
 
 const areaData = {
   Beach: {
-    background:
-      "url(https://placehold.co/800x600/FFE0B2/000000?text=Beach+Area)",
+    background: `url(${beachImage})`,
     activityZones: [
       {
         name: "Swimming Spot",
         id: "swim",
         x: 100,
-        y: 300,
+        y: 450,
         width: 150,
         height: 100,
         action: "Go for a swim (Happiness +10)",
@@ -54,7 +57,7 @@ const areaData = {
       {
         name: "Coconut Stand",
         id: "coconut",
-        x: 500,
+        x: 450,
         y: 150,
         width: 120,
         height: 80,
@@ -63,8 +66,8 @@ const areaData = {
       {
         name: "Seashell Hunt",
         id: "seashell",
-        x: 250,
-        y: 100,
+        x: 400,
+        y: 380,
         width: 100,
         height: 70,
         action: "Cari Kerang (Dapat Rare Gem, Score +)",
@@ -72,7 +75,7 @@ const areaData = {
       {
         name: "Build Sandcastle",
         id: "sandcastle",
-        x: 650,
+        x: 530,
         y: 400,
         width: 120,
         height: 90,
@@ -81,8 +84,7 @@ const areaData = {
     ],
   },
   Forest: {
-    background:
-      "url(https://placehold.co/800x600/C8E6C9/000000?text=Forest+Area)",
+    background: `url(${mountainImage})`,
     activityZones: [
       {
         name: "Berry Bush",
@@ -123,14 +125,13 @@ const areaData = {
     ],
   },
   Home: {
-    background:
-      "url(https://placehold.co/800x600/CFD8DC/000000?text=Home+Sweet+Home)",
+    background: `url(${homeImage})`,
     activityZones: [
       {
         name: "Bed",
         id: "bed",
-        x: 100,
-        y: 200,
+        x: 230,
+        y: 100,
         width: 100,
         height: 100,
         action: "Sleep (Sleep +20)",
@@ -138,8 +139,8 @@ const areaData = {
       {
         name: "Fridge",
         id: "fridge",
-        x: 300,
-        y: 250,
+        x: 570,
+        y: 280,
         width: 80,
         height: 80,
         action: "Eat a snack (Meal +10)",
@@ -147,8 +148,8 @@ const areaData = {
       {
         name: "Shower",
         id: "shower",
-        x: 50,
-        y: 350,
+        x: 570,
+        y: 100,
         width: 80,
         height: 100,
         action: "Mandi (Cleanliness +20)",
@@ -156,8 +157,8 @@ const areaData = {
       {
         name: "Work Desk",
         id: "work",
-        x: 450,
-        y: 100,
+        x: 120,
+        y: 380,
         width: 150,
         height: 120,
         action: "Bekerja (Money +20)",
@@ -207,14 +208,13 @@ const areaData = {
     ],
   },
   Lake: {
-    background:
-      "url(https://placehold.co/800x600/A7D9EE/000000?text=Lake+Area)",
+    background: `url(${lakeImage})`,
     activityZones: [
       {
         name: "Fishing Spot",
         id: "fish",
-        x: 150,
-        y: 450,
+        x: 100,
+        y: 280,
         width: 100,
         height: 80,
         action: "Go Fishing (Dapat Fishing Rod, Score +)",
@@ -222,7 +222,7 @@ const areaData = {
       {
         name: "Boating Dock",
         id: "boat",
-        x: 550,
+        x: 320,
         y: 300,
         width: 120,
         height: 100,
@@ -231,8 +231,8 @@ const areaData = {
       {
         name: "Rare Fish Spot",
         id: "rare_fish",
-        x: 300,
-        y: 100,
+        x: 500,
+        y: 300,
         width: 110,
         height: 80,
         action: "Cari Ikan Langka (Dapat Rare Gem, Score +)",
@@ -240,14 +240,13 @@ const areaData = {
     ],
   },
   Temple: {
-    background:
-      "url(https://placehold.co/800x600/F0F4C3/000000?text=Temple+Area)",
+    background: `url(${templeImage})`,
     activityZones: [
       {
         name: "Meditate Zone",
         id: "meditate",
-        x: 300,
-        y: 200,
+        x: 420,
+        y: 150,
         width: 100,
         height: 100,
         action: "Meditasi (Happiness +20, Sleep +5)",
@@ -255,8 +254,8 @@ const areaData = {
       {
         name: "Altar",
         id: "altar",
-        x: 600,
-        y: 400,
+        x: 300,
+        y: 150,
         width: 80,
         height: 80,
         action: "Persembahan (Money -20)",
@@ -264,8 +263,8 @@ const areaData = {
       {
         name: "Study Ancient Texts",
         id: "study_texts",
-        x: 100,
-        y: 50,
+        x: 340,
+        y: 300,
         width: 120,
         height: 90,
         action: "Pelajari Teks Kuno (Dapat Ancient Scroll, Score +)",
@@ -273,14 +272,13 @@ const areaData = {
     ],
   },
   Mountain: {
-    background:
-      "url(https://placehold.co/800x600/BDBDBD/000000?text=Mountain+Area)",
+    background: `url(${mountainImage})`,
     activityZones: [
       {
         name: "Hiking Trail",
         id: "hike",
-        x: 50,
-        y: 100,
+        x: 150,
+        y: 400,
         width: 100,
         height: 200,
         action: "Mendaki (Cleanliness -5, Happiness +10)",
@@ -288,8 +286,8 @@ const areaData = {
       {
         name: "Summit",
         id: "summit",
-        x: 700,
-        y: 50,
+        x: 240,
+        y: 90,
         width: 80,
         height: 80,
         action: "Nikmati Pemandangan (Happiness +25)",
@@ -297,8 +295,8 @@ const areaData = {
       {
         name: "Mine Entrance",
         id: "mine",
-        x: 250,
-        y: 450,
+        x: 350,
+        y: 350,
         width: 100,
         height: 70,
         action: "Menambang (Dapat Gold Coin, Score +)",
@@ -306,8 +304,8 @@ const areaData = {
       {
         name: "Secret Peak",
         id: "secret_peak",
-        x: 450,
-        y: 250,
+        x: 385,
+        y: 160,
         width: 90,
         height: 70,
         action: "Puncak Rahasia (Dapat Rare Gem, Score +)",
