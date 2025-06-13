@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/UAS_PTI_GROUP.../public/index/static/css/main.feaec7c1.css",
+    "main.js": "/UAS_PTI_GROUP.../public/index/static/js/main.b1aff7c2.js",
+    "static/media/templeimg.png": "/UAS_PTI_GROUP.../public/index/static/media/templeimg.89ac3b1c758eaccaace4.png",
+    "static/media/lakeimg.png": "/UAS_PTI_GROUP.../public/index/static/media/lakeimg.811f06d0d258693cb540.png",
+    "static/media/beachimg.png": "/UAS_PTI_GROUP.../public/index/static/media/beachimg.370bd90f3054038bb35d.png",
+    "static/media/mountainimg.png": "/UAS_PTI_GROUP.../public/index/static/media/mountainimg.de28fc3e1ddcc0320b29.png",
+    "static/media/Main_ArenaBG.png": "/UAS_PTI_GROUP.../public/index/static/media/Main_ArenaBG.6a3888ee07c6ce143990.png",
+    "static/media/homeimg.png": "/UAS_PTI_GROUP.../public/index/static/media/homeimg.f45271448bc8c02f0ecd.png",
+    "static/media/Male2.png": "/UAS_PTI_GROUP.../public/index/static/media/Male2.103aa18e572aae83771b.png",
+    "static/media/Female2.png": "/UAS_PTI_GROUP.../public/index/static/media/Female2.2092944339cd9d12b3e1.png",
+    "static/media/Female1.png": "/UAS_PTI_GROUP.../public/index/static/media/Female1.a88b2b0f06993a9c8e93.png",
+    "static/media/Male1.png": "/UAS_PTI_GROUP.../public/index/static/media/Male1.ea215fe43837427ca505.png",
+    "index.html": "/UAS_PTI_GROUP.../public/index/index.html",
+    "main.feaec7c1.css.map": "/UAS_PTI_GROUP.../public/index/static/css/main.feaec7c1.css.map",
+    "main.b1aff7c2.js.map": "/UAS_PTI_GROUP.../public/index/static/js/main.b1aff7c2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.feaec7c1.css",
+    "static/js/main.b1aff7c2.js"
+  ]
+}
